@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumberFinder.Game", "NumberFinder.Game\NumberFinder.Game.csproj", "{32C373FA-5121-4D1D-8606-9C76A691FF8D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{32C373FA-5121-4D1D-8606-9C76A691FF8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32C373FA-5121-4D1D-8606-9C76A691FF8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32C373FA-5121-4D1D-8606-9C76A691FF8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32C373FA-5121-4D1D-8606-9C76A691FF8D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {466484F7-67A5-463E-AF3D-4147AB673F73}
+	EndGlobalSection
+EndGlobal
