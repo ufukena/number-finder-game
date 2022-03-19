@@ -1,6 +1,6 @@
 ﻿namespace NumberFinder.Game.Forms
 {
-    partial class GameForm
+    partial class GamePlayForm
     {
         /// <summary>
         /// Required designer variable.

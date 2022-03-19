@@ -14,7 +14,10 @@ namespace NumberFinder.Game.Forms
 
         private void PlayButton_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            Forms.GameTypeForm f = new Forms.GameTypeForm();
+            f.ShowDialog();
+            this.Close();
         }
 
         private void ScoresButton_Click(object sender, EventArgs e)
