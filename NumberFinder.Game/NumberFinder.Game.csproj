@@ -7,9 +7,4 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Interface\" />
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
 </Project>
