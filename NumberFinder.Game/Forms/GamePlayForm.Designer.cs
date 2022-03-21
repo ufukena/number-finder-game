@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.LogDataGridView = new System.Windows.Forms.DataGridView();
+            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UpDown = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ExitButton = new System.Windows.Forms.Button();
             this.NumberTextBox = new System.Windows.Forms.TextBox();
             this.PlayButton = new System.Windows.Forms.Button();
@@ -39,21 +41,45 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.SituationLabel = new System.Windows.Forms.Label();
             this.GameScoreLabel = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ScoreGroupBox = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.LogDataGridView)).BeginInit();
             this.InfoGroupBox.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.ScoreGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // LogDataGridView
             // 
+            this.LogDataGridView.AllowUserToAddRows = false;
             this.LogDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.LogDataGridView.ColumnHeadersVisible = false;
+            this.LogDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Number,
+            this.UpDown});
+            this.LogDataGridView.Enabled = false;
             this.LogDataGridView.Location = new System.Drawing.Point(12, 92);
             this.LogDataGridView.Name = "LogDataGridView";
+            this.LogDataGridView.ReadOnly = true;
+            this.LogDataGridView.RowHeadersVisible = false;
             this.LogDataGridView.RowTemplate.Height = 25;
-            this.LogDataGridView.Size = new System.Drawing.Size(143, 257);
+            this.LogDataGridView.Size = new System.Drawing.Size(150, 257);
             this.LogDataGridView.TabIndex = 2;
+            // 
+            // Number
+            // 
+            this.Number.Frozen = true;
+            this.Number.HeaderText = "NumberColumn";
+            this.Number.Name = "Number";
+            this.Number.ReadOnly = true;
+            this.Number.Width = 75;
+            // 
+            // UpDown
+            // 
+            this.UpDown.Frozen = true;
+            this.UpDown.HeaderText = "UpDownColumn";
+            this.UpDown.Name = "UpDown";
+            this.UpDown.ReadOnly = true;
+            this.UpDown.Width = 75;
             // 
             // ExitButton
             // 
@@ -145,36 +171,39 @@
             this.SituationLabel.ForeColor = System.Drawing.Color.Red;
             this.SituationLabel.Location = new System.Drawing.Point(48, 16);
             this.SituationLabel.Name = "SituationLabel";
-            this.SituationLabel.Size = new System.Drawing.Size(94, 37);
+            this.SituationLabel.Size = new System.Drawing.Size(0, 37);
             this.SituationLabel.TabIndex = 9;
-            this.SituationLabel.Text = "-------";
+            this.SituationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // GameScoreLabel
             // 
             this.GameScoreLabel.AutoSize = true;
             this.GameScoreLabel.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.GameScoreLabel.ForeColor = System.Drawing.Color.Black;
+            this.GameScoreLabel.ForeColor = System.Drawing.Color.Green;
             this.GameScoreLabel.Location = new System.Drawing.Point(37, 17);
             this.GameScoreLabel.Name = "GameScoreLabel";
             this.GameScoreLabel.Size = new System.Drawing.Size(61, 37);
             this.GameScoreLabel.TabIndex = 10;
             this.GameScoreLabel.Text = "----";
+            this.GameScoreLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // groupBox1
+            // ScoreGroupBox
             // 
-            this.groupBox1.Controls.Add(this.GameScoreLabel);
-            this.groupBox1.Location = new System.Drawing.Point(12, 4);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(143, 69);
-            this.groupBox1.TabIndex = 11;
-            this.groupBox1.TabStop = false;
+            this.ScoreGroupBox.Controls.Add(this.GameScoreLabel);
+            this.ScoreGroupBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ScoreGroupBox.Location = new System.Drawing.Point(12, 4);
+            this.ScoreGroupBox.Name = "ScoreGroupBox";
+            this.ScoreGroupBox.Size = new System.Drawing.Size(150, 69);
+            this.ScoreGroupBox.TabIndex = 11;
+            this.ScoreGroupBox.TabStop = false;
+            this.ScoreGroupBox.Text = "SCORE";
             // 
             // GamePlayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 461);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.ScoreGroupBox);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.InfoGroupBox);
             this.Controls.Add(this.PlayButton);
@@ -193,8 +222,8 @@
             this.InfoGroupBox.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.ScoreGroupBox.ResumeLayout(false);
+            this.ScoreGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -212,6 +241,8 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label SituationLabel;
         private System.Windows.Forms.Label GameScoreLabel;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox ScoreGroupBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Number;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UpDown;
     }
 }

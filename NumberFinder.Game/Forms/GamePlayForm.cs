@@ -10,7 +10,7 @@ namespace NumberFinder.Game.Forms
     public partial class GamePlayForm : Form
     {
 
-        private GamePlay gameSession;
+        private GamePlay gamePlay;
         private readonly IGamePlayRepository gamePlayRepository;
 
 
@@ -19,11 +19,10 @@ namespace NumberFinder.Game.Forms
             InitializeComponent();
 
             gamePlayRepository = new GamePlayRepository();
-            gameSession = new GamePlay();
+            gamePlay = new GamePlay();
 
-            gameSession.GameType = gameType;
-            gameSession.TargetNumber = gamePlayRepository.SetTargetNumber(gameSession.GameType);
-            
+            gamePlay.GameType = gameType;
+            gamePlayRepository.SetTargetNumber(ref gamePlay);
 
 
         }
@@ -56,41 +55,52 @@ namespace NumberFinder.Game.Forms
                 }        
                     
                                
-                if (gameSession.GeneralPredictionCount != 0)
+                if (gamePlay.GeneralPredictionCount != 0)
                 {
 
-                    int predictionNumber = Convert.ToInt16(NumberTextBox.Text);                    
+                    int predictionNumber = Convert.ToInt16(NumberTextBox.Text);
 
-                    gameSession.Predictions.Add(predictionNumber);
+                    gamePlay.Predictions.Add(predictionNumber);
 
-                    if (predictionNumber > gameSession.TargetNumber)
+                    if (predictionNumber > gamePlay.TargetNumber)
                     {
-                        gameSession.PredictionCount += 1;
+                        gamePlay.PredictionCount += 1;
                         SituationLabel.Text = "Up";
                         SituationLabel.ForeColor = System.Drawing.Color.DarkBlue;
+                        LogDataGridView.Rows.Add(predictionNumber, "Up");
+                        this.LogDataGridView.Sort(LogDataGridView.Columns["Number"], ListSortDirection.Descending);
                     }
-                    else if (predictionNumber < gameSession.TargetNumber)
+                    else if (predictionNumber < gamePlay.TargetNumber)
                     {
-                        gameSession.PredictionCount += 1;
+                        gamePlay.PredictionCount += 1;
                         SituationLabel.Text = "Down";
                         SituationLabel.ForeColor = System.Drawing.Color.Red;
+                        LogDataGridView.Rows.Add(predictionNumber, "Down");
+                        this.LogDataGridView.Sort(LogDataGridView.Columns["Number"], ListSortDirection.Descending);
                     }
                     else
                     {
-                        gameSession.PredictionCount = 0;
-                        gameSession.KnowNumber += 1;
+                        
+                        //SetScore
+                        gamePlayRepository.CalculateScore(ref gamePlay);
+
+
+                        gamePlay.PredictionCount = 0;
+                        gamePlay.KnowNumber += 1;
+                        gamePlayRepository.SetTargetNumber(ref gamePlay);
 
                         SituationLabel.Text = "Success";
                         SituationLabel.ForeColor = System.Drawing.Color.Green;
-                        
-                        gameSession.CurrentScore += 10;                        
+
+
+                        LogDataGridView.Rows.Clear();                       
 
                     }
 
-                    
 
 
-                    gameSession.GeneralPredictionCount -= 1;
+
+                    gamePlay.GeneralPredictionCount -= 1;
                     SetDynamicGameInfo();
 
 
@@ -101,7 +111,7 @@ namespace NumberFinder.Game.Forms
                     //Game Finished
                     PlayButton.Enabled = false;
                     SituationLabel.Text = String.Empty;
-                    MessageBox.Show("Game Finished.. Your score is " + gameSession.CurrentScore);
+                    MessageBox.Show("Game Finished.. Your score is " + gamePlay.CurrentScore);
                 }
 
                 
@@ -122,12 +132,12 @@ namespace NumberFinder.Game.Forms
 
         void SetStaticGameInfo() {
 
-            if (gameSession.GameType == GameType.type_0_100)
+            if (gamePlay.GameType == GameType.type_0_100)
             {
                 GameTypeLabel.Text = "Game Type : 0 - 100";
                 NumberTextBox.MaxLength = 2;
             }
-            else if (gameSession.GameType == GameType.type_0_1000)
+            else if (gamePlay.GameType == GameType.type_0_1000)
             {
                 GameTypeLabel.Text = "Game Type : 0 - 1000";
                 NumberTextBox.MaxLength = 3;
@@ -139,16 +149,14 @@ namespace NumberFinder.Game.Forms
             }
         }
 
-
         void SetDynamicGameInfo() {
 
             NumberTextBox.Text = String.Empty;
-            GamePredictionLabel.Text = "Prediction : " + gameSession.GeneralPredictionCount;
-            KnowLabel.Text = "Know : " + gameSession.KnowNumber;
-            GameScoreLabel.Text = gameSession.CurrentScore.ToString();
+            GamePredictionLabel.Text = "Prediction : " + gamePlay.GeneralPredictionCount;
+            KnowLabel.Text = "Know : " + gamePlay.KnowNumber;
+            GameScoreLabel.Text = gamePlay.CurrentScore.ToString();
 
         }
-
 
         private void NumberTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
