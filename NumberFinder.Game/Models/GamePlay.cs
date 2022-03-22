@@ -1,5 +1,4 @@
 ﻿using NumberFinder.Game.Enums;
-using System.Collections.Generic;
 
 namespace NumberFinder.Game.Models
 {
@@ -16,9 +15,6 @@ namespace NumberFinder.Game.Models
         public int GeneralPredictionCount { get; set; } = 50;
 
         public int CurrentScore { get; set; } 
-
-        public List<int> Predictions { get; set; } = new List<int>();
-
 
 
 

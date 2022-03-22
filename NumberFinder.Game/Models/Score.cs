@@ -1,12 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace NumberFinder.Game.Models
 {
-    internal class Score
+    public class Score
     {
+
+        public int RowNumber { get; set; }
+
+        public int ScoreValue { get; set; }
+
+        public DateTime ScoreDate { get; set; }
+
     }
+
 }

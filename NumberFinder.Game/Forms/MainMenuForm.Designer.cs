@@ -30,7 +30,6 @@
         {
             this.PlayButton = new System.Windows.Forms.Button();
             this.ScoresButton = new System.Windows.Forms.Button();
-            this.RulesButton = new System.Windows.Forms.Button();
             this.ExitButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -56,17 +55,6 @@
             this.ScoresButton.UseVisualStyleBackColor = true;
             this.ScoresButton.Click += new System.EventHandler(this.ScoresButton_Click);
             // 
-            // RulesButton
-            // 
-            this.RulesButton.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.RulesButton.Location = new System.Drawing.Point(12, 144);
-            this.RulesButton.Name = "RulesButton";
-            this.RulesButton.Size = new System.Drawing.Size(260, 60);
-            this.RulesButton.TabIndex = 2;
-            this.RulesButton.Text = "Rules";
-            this.RulesButton.UseVisualStyleBackColor = true;
-            this.RulesButton.Click += new System.EventHandler(this.RulesButton_Click);
-            // 
             // ExitButton
             // 
             this.ExitButton.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -84,7 +72,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 361);
             this.Controls.Add(this.ExitButton);
-            this.Controls.Add(this.RulesButton);
             this.Controls.Add(this.ScoresButton);
             this.Controls.Add(this.PlayButton);
             this.MaximizeBox = false;
@@ -98,7 +85,6 @@
 
         private System.Windows.Forms.Button PlayButton;
         private System.Windows.Forms.Button ScoresButton;
-        private System.Windows.Forms.Button RulesButton;
         private System.Windows.Forms.Button ExitButton;
     }
 }

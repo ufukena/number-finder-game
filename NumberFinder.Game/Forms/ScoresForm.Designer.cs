@@ -28,9 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ExitButton = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.ScoreDataGridView = new System.Windows.Forms.DataGridView();
+            this.RowNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ScoreValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ScoreDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.ScoreDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // ExitButton
@@ -44,24 +51,80 @@
             this.ExitButton.UseVisualStyleBackColor = true;
             this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 
-            // dataGridView1
+            // ScoreDataGridView
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 10);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(260, 310);
-            this.dataGridView1.TabIndex = 1;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ScoreDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.ScoreDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ScoreDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.RowNumber,
+            this.ScoreValue,
+            this.ScoreDate});
+            this.ScoreDataGridView.Location = new System.Drawing.Point(12, 10);
+            this.ScoreDataGridView.MultiSelect = false;
+            this.ScoreDataGridView.Name = "ScoreDataGridView";
+            this.ScoreDataGridView.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ScoreDataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.ScoreDataGridView.RowHeadersVisible = false;
+            this.ScoreDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ScoreDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.ScoreDataGridView.RowTemplate.Height = 25;
+            this.ScoreDataGridView.Size = new System.Drawing.Size(260, 310);
+            this.ScoreDataGridView.TabIndex = 1;
+            // 
+            // RowNumber
+            // 
+            this.RowNumber.DataPropertyName = "RowNumber";
+            this.RowNumber.Frozen = true;
+            this.RowNumber.HeaderText = "NO";
+            this.RowNumber.Name = "RowNumber";
+            this.RowNumber.ReadOnly = true;
+            this.RowNumber.Width = 50;
+            // 
+            // ScoreValue
+            // 
+            this.ScoreValue.DataPropertyName = "ScoreValue";
+            this.ScoreValue.Frozen = true;
+            this.ScoreValue.HeaderText = "SCORE";
+            this.ScoreValue.Name = "ScoreValue";
+            this.ScoreValue.ReadOnly = true;
+            this.ScoreValue.Width = 90;
+            // 
+            // ScoreDate
+            // 
+            this.ScoreDate.DataPropertyName = "ScoreDate";
+            dataGridViewCellStyle2.Format = "yyyy-MM-dd HH:mm";
+            dataGridViewCellStyle2.NullValue = null;
+            this.ScoreDate.DefaultCellStyle = dataGridViewCellStyle2;
+            this.ScoreDate.Frozen = true;
+            this.ScoreDate.HeaderText = "DATE";
+            this.ScoreDate.Name = "ScoreDate";
+            this.ScoreDate.ReadOnly = true;
             // 
             // ScoresForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 411);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.ScoreDataGridView);
             this.Controls.Add(this.ExitButton);
             this.Name = "ScoresForm";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Load += new System.EventHandler(this.ScoresForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.ScoreDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -69,6 +132,9 @@
         #endregion
 
         private System.Windows.Forms.Button ExitButton;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView ScoreDataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RowNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ScoreValue;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ScoreDate;
     }
 }

@@ -7,11 +7,12 @@ using System.Windows.Forms;
 
 namespace NumberFinder.Game.Forms
 {
-    public partial class GamePlayForm : Form
+    public partial class GamePlayForm : BaseForm
     {
 
         private GamePlay gamePlay;
         private readonly IGamePlayRepository gamePlayRepository;
+        private readonly IScoreRepository scoreRepository;
 
 
         public GamePlayForm(GameType gameType)
@@ -19,32 +20,36 @@ namespace NumberFinder.Game.Forms
             InitializeComponent();
 
             gamePlayRepository = new GamePlayRepository();
+            scoreRepository = new ScoreRepository();
+
             gamePlay = new GamePlay();
 
             gamePlay.GameType = gameType;
             gamePlayRepository.SetTargetNumber(ref gamePlay);
-
 
         }
 
 
         private void GamePlayForm_Load(object sender, EventArgs e)
         {
-
             SetBeginingGameInfo();
-
-
         }
-
 
 
         private void ExitButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Forms.MainMenuForm f = new Forms.MainMenuForm();
-            f.ShowDialog();
-            this.Close();
+            DialogResult result = MessageBox.Show("Are You Sure Exit ? Current Score Will Not Be Saved", "Exit", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            if (result.Equals(DialogResult.OK))
+            {
+                this.Hide();
+                Forms.MainMenuForm f = new Forms.MainMenuForm();
+                f.ShowDialog();
+                this.Close();
+            }
+           
+           
         }
+
 
         private void PlayButton_Click(object sender, EventArgs e)
         {
@@ -53,82 +58,94 @@ namespace NumberFinder.Game.Forms
                 if (string.IsNullOrEmpty(NumberTextBox.Text)) {
                     MessageBox.Show("Please Set A Number"); return;
                 }        
-                    
-                               
-                if (gamePlay.GeneralPredictionCount != 0)
+                                                                   
+                int predictionNumber = Convert.ToInt16(NumberTextBox.Text);
+ 
+
+                if (predictionNumber > gamePlay.TargetNumber)
                 {
+                    gamePlay.PredictionCount += 1;
+                    SituationLabel.Text = "Up";
+                    SituationLabel.ForeColor = System.Drawing.Color.DarkBlue;
 
-                    int predictionNumber = Convert.ToInt16(NumberTextBox.Text);
+                    LogDataGridView.Rows.Add(predictionNumber, "Up");
+                    LogDataGridView.Sort(LogDataGridView.Columns["Number"], ListSortDirection.Descending);
+                    LogDataGridView.ClearSelection();
+                }
+                else if (predictionNumber < gamePlay.TargetNumber)
+                {
+                    gamePlay.PredictionCount += 1;
+                    SituationLabel.Text = "Down";
+                    SituationLabel.ForeColor = System.Drawing.Color.Red;
 
-                    gamePlay.Predictions.Add(predictionNumber);
-
-                    if (predictionNumber > gamePlay.TargetNumber)
-                    {
-                        gamePlay.PredictionCount += 1;
-                        SituationLabel.Text = "Up";
-                        SituationLabel.ForeColor = System.Drawing.Color.DarkBlue;
-                        LogDataGridView.Rows.Add(predictionNumber, "Up");
-                        this.LogDataGridView.Sort(LogDataGridView.Columns["Number"], ListSortDirection.Descending);
-                    }
-                    else if (predictionNumber < gamePlay.TargetNumber)
-                    {
-                        gamePlay.PredictionCount += 1;
-                        SituationLabel.Text = "Down";
-                        SituationLabel.ForeColor = System.Drawing.Color.Red;
-                        LogDataGridView.Rows.Add(predictionNumber, "Down");
-                        this.LogDataGridView.Sort(LogDataGridView.Columns["Number"], ListSortDirection.Descending);
-                    }
-                    else
-                    {
-                        
-                        //SetScore
-                        gamePlayRepository.CalculateScore(ref gamePlay);
-
-
-                        gamePlay.PredictionCount = 0;
-                        gamePlay.KnowNumber += 1;
-                        gamePlayRepository.SetTargetNumber(ref gamePlay);
-
-                        SituationLabel.Text = "Success";
-                        SituationLabel.ForeColor = System.Drawing.Color.Green;
-
-
-                        LogDataGridView.Rows.Clear();                       
-
-                    }
-
-
-
-
-                    gamePlay.GeneralPredictionCount -= 1;
-                    SetDynamicGameInfo();
-
-
-
+                    LogDataGridView.Rows.Add(predictionNumber, "Down");
+                    LogDataGridView.Sort(LogDataGridView.Columns["Number"], ListSortDirection.Descending);
+                    LogDataGridView.ClearSelection();
                 }
                 else
                 {
-                    //Game Finished
-                    PlayButton.Enabled = false;
-                    SituationLabel.Text = String.Empty;
-                    MessageBox.Show("Game Finished.. Your score is " + gamePlay.CurrentScore);
+                        
+                    //SetScore
+                    gamePlayRepository.CalculateScore(ref gamePlay);                        
+
+                    gamePlay.PredictionCount = 0;
+                    gamePlay.KnowNumber += 1;
+                    gamePlayRepository.SetTargetNumber(ref gamePlay);
+
+                    SituationLabel.Text = "Success";
+                    SituationLabel.ForeColor = System.Drawing.Color.Green;
+
+
+                    LogDataGridView.Rows.Clear();                       
+
                 }
 
-                
+
+                gamePlay.GeneralPredictionCount -= 1;
+                SetDynamicGameInfo();
+
+
+                if (gamePlay.GeneralPredictionCount == 0)
+                {
+
+                    //Game Finished
+                    if (gamePlay.CurrentScore > 0) {
+                        Score score = new Score { ScoreValue = gamePlay.CurrentScore, ScoreDate = System.DateTime.Now };
+                        scoreRepository.Create(score);
+                    }
+                    
+
+                    PlayButton.Enabled = false;
+                    SituationLabel.Text = String.Empty;
+
+                    DialogResult result = MessageBox.Show("Game Finished.. Your score is " + gamePlay.CurrentScore, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (result.Equals(DialogResult.OK))
+                    {
+                        this.Hide();
+                        Forms.MainMenuForm f = new Forms.MainMenuForm();
+                        f.ShowDialog();
+                        this.Close();
+                    }
+                   
+
+                }
+
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
         
         }
 
+
         void SetBeginingGameInfo() {
             
             SetStaticGameInfo();
             SetDynamicGameInfo();
         }
+
 
         void SetStaticGameInfo() {
 
@@ -149,6 +166,7 @@ namespace NumberFinder.Game.Forms
             }
         }
 
+
         void SetDynamicGameInfo() {
 
             NumberTextBox.Text = String.Empty;
@@ -157,6 +175,7 @@ namespace NumberFinder.Game.Forms
             GameScoreLabel.Text = gamePlay.CurrentScore.ToString();
 
         }
+
 
         private void NumberTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {

@@ -38,13 +38,13 @@
             this.GamePredictionLabel = new System.Windows.Forms.Label();
             this.KnowLabel = new System.Windows.Forms.Label();
             this.InfoGroupBox = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.SituationGroupBox = new System.Windows.Forms.GroupBox();
             this.SituationLabel = new System.Windows.Forms.Label();
             this.GameScoreLabel = new System.Windows.Forms.Label();
             this.ScoreGroupBox = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.LogDataGridView)).BeginInit();
             this.InfoGroupBox.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.SituationGroupBox.SuspendLayout();
             this.ScoreGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,7 +56,6 @@
             this.LogDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Number,
             this.UpDown});
-            this.LogDataGridView.Enabled = false;
             this.LogDataGridView.Location = new System.Drawing.Point(12, 92);
             this.LogDataGridView.Name = "LogDataGridView";
             this.LogDataGridView.ReadOnly = true;
@@ -127,7 +126,7 @@
             // 
             this.GamePredictionLabel.AutoSize = true;
             this.GamePredictionLabel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.GamePredictionLabel.Location = new System.Drawing.Point(6, 57);
+            this.GamePredictionLabel.Location = new System.Drawing.Point(6, 58);
             this.GamePredictionLabel.Name = "GamePredictionLabel";
             this.GamePredictionLabel.Size = new System.Drawing.Size(102, 19);
             this.GamePredictionLabel.TabIndex = 7;
@@ -155,36 +154,33 @@
             this.InfoGroupBox.TabIndex = 9;
             this.InfoGroupBox.TabStop = false;
             // 
-            // groupBox2
+            // SituationGroupBox
             // 
-            this.groupBox2.Controls.Add(this.SituationLabel);
-            this.groupBox2.Location = new System.Drawing.Point(173, 153);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(199, 61);
-            this.groupBox2.TabIndex = 10;
-            this.groupBox2.TabStop = false;
+            this.SituationGroupBox.Controls.Add(this.SituationLabel);
+            this.SituationGroupBox.Location = new System.Drawing.Point(173, 153);
+            this.SituationGroupBox.Name = "SituationGroupBox";
+            this.SituationGroupBox.Size = new System.Drawing.Size(199, 61);
+            this.SituationGroupBox.TabIndex = 10;
+            this.SituationGroupBox.TabStop = false;
             // 
             // SituationLabel
             // 
-            this.SituationLabel.AutoSize = true;
             this.SituationLabel.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.SituationLabel.ForeColor = System.Drawing.Color.Red;
-            this.SituationLabel.Location = new System.Drawing.Point(48, 16);
+            this.SituationLabel.Location = new System.Drawing.Point(6, 16);
             this.SituationLabel.Name = "SituationLabel";
-            this.SituationLabel.Size = new System.Drawing.Size(0, 37);
+            this.SituationLabel.Size = new System.Drawing.Size(187, 37);
             this.SituationLabel.TabIndex = 9;
             this.SituationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // GameScoreLabel
             // 
-            this.GameScoreLabel.AutoSize = true;
             this.GameScoreLabel.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.GameScoreLabel.ForeColor = System.Drawing.Color.Green;
-            this.GameScoreLabel.Location = new System.Drawing.Point(37, 17);
+            this.GameScoreLabel.Location = new System.Drawing.Point(6, 19);
             this.GameScoreLabel.Name = "GameScoreLabel";
-            this.GameScoreLabel.Size = new System.Drawing.Size(61, 37);
+            this.GameScoreLabel.Size = new System.Drawing.Size(138, 37);
             this.GameScoreLabel.TabIndex = 10;
-            this.GameScoreLabel.Text = "----";
             this.GameScoreLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ScoreGroupBox
@@ -204,26 +200,21 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 461);
             this.Controls.Add(this.ScoreGroupBox);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.SituationGroupBox);
             this.Controls.Add(this.InfoGroupBox);
             this.Controls.Add(this.PlayButton);
             this.Controls.Add(this.NumberTextBox);
             this.Controls.Add(this.ExitButton);
             this.Controls.Add(this.LogDataGridView);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "GamePlayForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Number Finder";
             this.Load += new System.EventHandler(this.GamePlayForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.LogDataGridView)).EndInit();
             this.InfoGroupBox.ResumeLayout(false);
             this.InfoGroupBox.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.SituationGroupBox.ResumeLayout(false);
             this.ScoreGroupBox.ResumeLayout(false);
-            this.ScoreGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -238,7 +229,7 @@
         private System.Windows.Forms.Label GamePredictionLabel;
         private System.Windows.Forms.Label KnowLabel;
         private System.Windows.Forms.GroupBox InfoGroupBox;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox SituationGroupBox;
         private System.Windows.Forms.Label SituationLabel;
         private System.Windows.Forms.Label GameScoreLabel;
         private System.Windows.Forms.GroupBox ScoreGroupBox;
